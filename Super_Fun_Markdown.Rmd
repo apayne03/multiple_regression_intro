@@ -1,0 +1,26 @@
+---
+title: "Untitled"
+author: "Alyssa Payne"
+date: "November 8, 2016"
+output: pdf_document
+---
+
+# My first heading
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+my.data <- read_csv("regLectureData.csv")
+my.reg <- lm(VidScore ~ age + iq, data = my.data)
+
+library(apaTables)
+x <- apa.reg.table(my.reg, filename = "my_reg_table.doc", table.number = 1)
+
+psych::pairs.panels(my.data)
+
+my_graph <- qplot (iq, age, data = my.data)
+#print(my_graph)
+
+iq_mean <- round(mean(my.data$iq), 3)
+```
+
+The mean IQ in my sample was *M* = `r iq_mean`
